@@ -9,7 +9,7 @@ function ProductList() {
   const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
-  const totalCartItems = useMemo(() => {
+  const cartItemsCount = useMemo(() => {
     return cart.reduce((p, c) => p + c.quantity, 0);
   }, [cart]);
 
@@ -342,7 +342,9 @@ function ProductList() {
                     id="mainIconPathAttribute"
                   ></path>
                 </svg>
-                <span className="cart_quantity_count">{totalCartItems}</span>
+                <span data-test="1" className="cart_quantity_count">
+                  {cartItemsCount}
+                </span>
               </h1>
             </a>
           </div>
