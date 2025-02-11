@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "./ProductList.css";
 import CartItem from "./CartItem";
 import { addItem } from "./CartSlice";
@@ -8,6 +8,10 @@ function ProductList() {
   const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
   const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
+
+  const totalCartItems = useMemo(() => {
+    return cart.reduce((p, c) => p + c.quantity, 0);
+  }, [cart]);
 
   const plantsArray = [
     {
@@ -338,7 +342,7 @@ function ProductList() {
                     id="mainIconPathAttribute"
                   ></path>
                 </svg>
-                <span className="cart_quantity_count">{cart.length}</span>
+                <span className="cart_quantity_count">{totalCartItems}</span>
               </h1>
             </a>
           </div>
